@@ -16,6 +16,7 @@ import {
   Cog,
   TrendingUp
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
@@ -24,14 +25,16 @@ const Index = () => {
       <nav className="fixed top-0 w-full z-50 bg-white/10 backdrop-blur-md border-b border-white/20">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2">
               <Brain className="h-8 w-8 text-purple-400" />
               <span className="text-2xl font-bold text-white">NeuralFlow AI</span>
-            </div>
+            </Link>
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#services" className="text-white/80 hover:text-white transition-colors">Services</a>
-              <a href="#about" className="text-white/80 hover:text-white transition-colors">About</a>
-              <a href="#contact" className="text-white/80 hover:text-white transition-colors">Contact</a>
+              <Link to="/services" className="text-white/80 hover:text-white transition-colors">Services</Link>
+              <Link to="/about" className="text-white/80 hover:text-white transition-colors">About</Link>
+              <Link to="/case-studies" className="text-white/80 hover:text-white transition-colors">Case Studies</Link>
+              <Link to="/blog" className="text-white/80 hover:text-white transition-colors">Blog</Link>
+              <Link to="/contact" className="text-white/80 hover:text-white transition-colors">Contact</Link>
               <Button className="bg-purple-600 hover:bg-purple-700">Get Started</Button>
             </div>
           </div>
