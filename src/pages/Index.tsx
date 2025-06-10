@@ -2,27 +2,29 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Brain, Users, Target, Zap, Award } from "lucide-react";
+import { Brain, Sparkles, TrendingUp, Zap, Users, CheckCircle, ArrowRight, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white/10 backdrop-blur-md border-b border-white/20">
+      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center space-x-2">
-              <Brain className="h-8 w-8 text-purple-400" />
-              <span className="text-2xl font-bold text-white">NeuralFlow AI</span>
+            <Link to="/" className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                <Brain className="h-6 w-6 text-white" />
+              </div>
+              <span className="text-2xl font-bold text-gray-900">NeuralFlow</span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
-              <Link to="/services" className="text-white/80 hover:text-white transition-colors">Services</Link>
-              <Link to="/about" className="text-white/80 hover:text-white transition-colors">About</Link>
-              <Link to="/case-studies" className="text-white/80 hover:text-white transition-colors">Case Studies</Link>
-              <Link to="/blog" className="text-white/80 hover:text-white transition-colors">Blog</Link>
-              <Link to="/contact" className="text-white/80 hover:text-white transition-colors">Contact</Link>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white">Get Started</Button>
+              <Link to="/services" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Services</Link>
+              <Link to="/about" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">About</Link>
+              <Link to="/case-studies" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Case Studies</Link>
+              <Link to="/blog" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Blog</Link>
+              <Link to="/contact" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Contact</Link>
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6">Get Started</Button>
             </div>
           </div>
         </div>
@@ -30,158 +32,190 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6">
-        <div className="container mx-auto text-center">
-          <Badge className="mb-6 bg-purple-600/20 text-purple-300 border-purple-500/30">
-            🚀 Unlock the Future
-          </Badge>
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            AI Solutions for
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"> Business Transformation</span>
-          </h1>
-          <p className="text-xl text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Harness the power of artificial intelligence to optimize your operations, drive growth, and stay ahead of the competition.
-          </p>
-          <div className="flex justify-center gap-4">
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-3">
-              Explore Services
-            </Button>
-            <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 text-lg px-8 py-3">
-              Learn More
-            </Button>
+        <div className="container mx-auto">
+          <div className="max-w-4xl mx-auto text-center">
+            <Badge className="mb-6 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
+              <Sparkles className="h-3 w-3 mr-1" />
+              Trusted by 500+ Companies
+            </Badge>
+            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+              AI Solutions That
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent block">
+                Drive Results
+              </span>
+            </h1>
+            <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+              Transform your business with cutting-edge artificial intelligence. We build custom AI solutions that automate processes, boost efficiency, and accelerate growth.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg">
+                Start Your AI Journey
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button size="lg" variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-4 text-lg">
+                View Case Studies
+              </Button>
+            </div>
+            
+            {/* Social Proof */}
+            <div className="flex items-center justify-center space-x-8 text-sm text-gray-500">
+              <div className="flex items-center space-x-1">
+                <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                <span className="font-medium">4.9/5 Client Rating</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <CheckCircle className="h-4 w-4 text-green-500" />
+                <span className="font-medium">150+ Projects Delivered</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="py-20 px-6 bg-white/5">
+      <section className="py-20 px-6 bg-gray-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Our AI Solutions</h2>
-            <p className="text-xl text-white/70 max-w-2xl mx-auto">
-              Cutting-edge artificial intelligence services tailored to transform your business
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our AI Services</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Comprehensive AI solutions tailored to your business needs
             </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-white/10 border-white/20 backdrop-blur-sm p-6 hover:bg-white/15 transition-all">
-              <CardHeader>
-                <Brain className="h-12 w-12 text-purple-400 mb-4" />
-                <CardTitle className="text-white text-xl">Machine Learning</CardTitle>
-                <CardDescription className="text-white/70">
-                  Custom ML models that learn from your data to make intelligent predictions and automate complex decisions.
+            <Card className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <CardHeader className="pb-4">
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                  <Brain className="h-6 w-6 text-blue-600" />
+                </div>
+                <CardTitle className="text-gray-900 text-xl">Custom AI Development</CardTitle>
+                <CardDescription className="text-gray-600">
+                  Bespoke machine learning models designed specifically for your business challenges and objectives.
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">Read More</Button>
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                    Machine Learning Models
+                  </li>
+                  <li className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                    Natural Language Processing
+                  </li>
+                  <li className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                    Computer Vision
+                  </li>
+                </ul>
+                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">Learn More</Button>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/10 border-white/20 backdrop-blur-sm p-6 hover:bg-white/15 transition-all">
-              <CardHeader>
-                <Zap className="h-12 w-12 text-blue-400 mb-4" />
-                <CardTitle className="text-white text-xl">Process Automation</CardTitle>
-                <CardDescription className="text-white/70">
-                  Streamline operations with intelligent automation that reduces costs and eliminates human error.
+            <Card className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <CardHeader className="pb-4">
+                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                  <Zap className="h-6 w-6 text-purple-600" />
+                </div>
+                <CardTitle className="text-gray-900 text-xl">Process Automation</CardTitle>
+                <CardDescription className="text-gray-600">
+                  Intelligent automation solutions that streamline operations and reduce manual work.
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">Read More</Button>
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                    Workflow Automation
+                  </li>
+                  <li className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                    Document Processing
+                  </li>
+                  <li className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                    Intelligent Chatbots
+                  </li>
+                </ul>
+                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">Learn More</Button>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/10 border-white/20 backdrop-blur-sm p-6 hover:bg-white/15 transition-all">
-              <CardHeader>
-                <Target className="h-12 w-12 text-green-400 mb-4" />
-                <CardTitle className="text-white text-xl">Predictive Analytics</CardTitle>
-                <CardDescription className="text-white/70">
-                  Harness the power of data to forecast trends, optimize performance, and make data-driven decisions.
+            <Card className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <CardHeader className="pb-4">
+                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                  <TrendingUp className="h-6 w-6 text-green-600" />
+                </div>
+                <CardTitle className="text-gray-900 text-xl">Data Analytics</CardTitle>
+                <CardDescription className="text-gray-600">
+                  Advanced analytics and insights to drive data-driven decision making.
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">Read More</Button>
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                    Predictive Analytics
+                  </li>
+                  <li className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                    Business Intelligence
+                  </li>
+                  <li className="flex items-center text-sm text-gray-600">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                    Performance Optimization
+                  </li>
+                </ul>
+                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">Learn More</Button>
               </CardContent>
             </Card>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
+      {/* Stats Section */}
       <section className="py-20 px-6">
         <div className="container mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="flex items-center">
-              <Award className="h-48 w-48 text-purple-400" />
+          <div className="grid md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-4xl font-bold text-blue-600 mb-2">500+</div>
+              <div className="text-gray-600">AI Models Deployed</div>
             </div>
             <div>
-              <Badge className="mb-6 bg-purple-600/20 text-purple-300 border-purple-500/30">
-                🏆 About NeuralFlow AI
-              </Badge>
-              <h2 className="text-4xl font-bold text-white mb-6">
-                Pioneering the Future of Artificial Intelligence
-              </h2>
-              <p className="text-xl text-white/70 mb-8">
-                We are a team of AI experts, data scientists, and engineers dedicated to transforming businesses through cutting-edge artificial intelligence solutions.
-              </p>
-              <Link to="/about">
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white">Learn More About Us</Button>
-              </Link>
+              <div className="text-4xl font-bold text-blue-600 mb-2">150+</div>
+              <div className="text-gray-600">Happy Clients</div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Case Studies Section */}
-      <section className="py-20 px-6">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Success Stories</h2>
-            <p className="text-xl text-white/70 max-w-2xl mx-auto">
-              See how we've helped businesses transform with AI
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="bg-white/10 border-white/20 backdrop-blur-sm p-8">
-              <CardHeader>
-                <Badge className="mb-4 bg-green-600/20 text-green-300 border-green-500/30">E-commerce</Badge>
-                <CardTitle className="text-white text-2xl mb-4">40% Revenue Increase</CardTitle>
-                <CardDescription className="text-white/70 text-lg">
-                  Our recommendation engine helped an online retailer increase sales by personalizing the shopping experience for each customer.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white">View Case Studies</Button>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white/10 border-white/20 backdrop-blur-sm p-8">
-              <CardHeader>
-                <Badge className="mb-4 bg-blue-600/20 text-blue-300 border-blue-500/30">Manufacturing</Badge>
-                <CardTitle className="text-white text-2xl mb-4">50% Cost Reduction</CardTitle>
-                <CardDescription className="text-white/70 text-lg">
-                  Predictive maintenance AI reduced downtime and maintenance costs for a major manufacturing company.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white">View Case Studies</Button>
-              </CardContent>
-            </Card>
+            <div>
+              <div className="text-4xl font-bold text-blue-600 mb-2">95%</div>
+              <div className="text-gray-600">Success Rate</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold text-blue-600 mb-2">24/7</div>
+              <div className="text-gray-600">Support Available</div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-6 bg-white/5">
+      <section className="py-20 px-6 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="container mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-6">Ready to Transform Your Business?</h2>
-          <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
-            Contact us today to learn how our AI solutions can drive innovation, efficiency, and growth for your organization.
+          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+            Join hundreds of companies that trust us to deliver cutting-edge AI solutions.
           </p>
-          <Link to="/contact">
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-3">
-              Get Started
-            </Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Link to="/contact">
+              <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg">
+                Get Free Consultation
+              </Button>
+            </Link>
+            <Link to="/services">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-4 text-lg">
+                View All Services
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
     </div>
