@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -21,7 +22,7 @@ const Index = () => {
               <Link to="/case-studies" className="text-white/80 hover:text-white transition-colors">Case Studies</Link>
               <Link to="/blog" className="text-white/80 hover:text-white transition-colors">Blog</Link>
               <Link to="/contact" className="text-white/80 hover:text-white transition-colors">Contact</Link>
-              <Button className="bg-purple-600 hover:bg-purple-700">Get Started</Button>
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white">Get Started</Button>
             </div>
           </div>
         </div>
@@ -41,7 +42,7 @@ const Index = () => {
             Harness the power of artificial intelligence to optimize your operations, drive growth, and stay ahead of the competition.
           </p>
           <div className="flex justify-center gap-4">
-            <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-lg px-8 py-3">
+            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-3">
               Explore Services
             </Button>
             <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 text-lg px-8 py-3">
@@ -71,7 +72,7 @@ const Index = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">Read More</Button>
+                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">Read More</Button>
               </CardContent>
             </Card>
 
@@ -84,7 +85,7 @@ const Index = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">Read More</Button>
+                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">Read More</Button>
               </CardContent>
             </Card>
 
@@ -97,7 +98,7 @@ const Index = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">Read More</Button>
+                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">Read More</Button>
               </CardContent>
             </Card>
           </div>
@@ -122,7 +123,7 @@ const Index = () => {
                 We are a team of AI experts, data scientists, and engineers dedicated to transforming businesses through cutting-edge artificial intelligence solutions.
               </p>
               <Link to="/about">
-                <Button className="bg-purple-600 hover:bg-purple-700 text-white">Learn More About Us</Button>
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white">Learn More About Us</Button>
               </Link>
             </div>
           </div>
@@ -149,7 +150,7 @@ const Index = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button className="bg-purple-600 hover:bg-purple-700 text-white">View Case Studies</Button>
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white">View Case Studies</Button>
               </CardContent>
             </Card>
 
@@ -162,7 +163,7 @@ const Index = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button className="bg-purple-600 hover:bg-purple-700 text-white">View Case Studies</Button>
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white">View Case Studies</Button>
               </CardContent>
             </Card>
           </div>
@@ -177,7 +178,7 @@ const Index = () => {
             Contact us today to learn how our AI solutions can drive innovation, efficiency, and growth for your organization.
           </p>
           <Link to="/contact">
-            <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-lg px-8 py-3">
+            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-3">
               Get Started
             </Button>
           </Link>
