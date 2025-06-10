@@ -9,22 +9,24 @@ import { Link } from "react-router-dom";
 
 const Contact = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white/10 backdrop-blur-md border-b border-white/20">
+      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center space-x-2">
-              <Brain className="h-8 w-8 text-purple-400" />
-              <span className="text-2xl font-bold text-white">NeuralFlow AI</span>
+            <Link to="/" className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                <Brain className="h-6 w-6 text-white" />
+              </div>
+              <span className="text-2xl font-bold text-gray-900">NeuralFlow</span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
-              <Link to="/services" className="text-white/80 hover:text-white transition-colors">Services</Link>
-              <Link to="/about" className="text-white/80 hover:text-white transition-colors">About</Link>
-              <Link to="/case-studies" className="text-white/80 hover:text-white transition-colors">Case Studies</Link>
-              <Link to="/blog" className="text-white/80 hover:text-white transition-colors">Blog</Link>
-              <Link to="/contact" className="text-white transition-colors">Contact</Link>
-              <Button className="bg-purple-600 hover:bg-purple-700">Get Started</Button>
+              <Link to="/services" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Services</Link>
+              <Link to="/about" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">About</Link>
+              <Link to="/case-studies" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Case Studies</Link>
+              <Link to="/blog" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Blog</Link>
+              <Link to="/contact" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Contact</Link>
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6">Get Started</Button>
             </div>
           </div>
         </div>
@@ -33,14 +35,16 @@ const Contact = () => {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6">
         <div className="container mx-auto text-center">
-          <Badge className="mb-6 bg-purple-600/20 text-purple-300 border-purple-500/30">
+          <Badge className="mb-6 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
             💬 Get in Touch
           </Badge>
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
             Let's Transform Your Business
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"> Together</span>
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent block">
+              Together
+            </span>
           </h1>
-          <p className="text-xl text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
             Ready to harness the power of AI? Our experts are here to help you identify opportunities and build solutions that drive real results.
           </p>
         </div>
@@ -51,13 +55,13 @@ const Contact = () => {
         <div className="container mx-auto">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <Card className="bg-white/10 border-white/20 backdrop-blur-sm p-8">
+            <Card className="bg-white border-0 shadow-lg p-8">
               <CardHeader className="px-0">
-                <CardTitle className="text-white text-2xl flex items-center">
-                  <MessageSquare className="h-6 w-6 mr-3 text-purple-400" />
+                <CardTitle className="text-gray-900 text-2xl flex items-center">
+                  <MessageSquare className="h-6 w-6 mr-3 text-blue-600" />
                   Send us a Message
                 </CardTitle>
-                <CardDescription className="text-white/70">
+                <CardDescription className="text-gray-600">
                   Fill out the form below and we'll get back to you within 24 hours.
                 </CardDescription>
               </CardHeader>
@@ -65,47 +69,47 @@ const Contact = () => {
                 <form className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="firstName" className="text-white">First Name</Label>
+                      <Label htmlFor="firstName" className="text-gray-700">First Name</Label>
                       <Input 
                         id="firstName" 
-                        className="bg-white/10 border-white/20 text-white placeholder-white/60"
+                        className="border-gray-200 focus:border-blue-500"
                         placeholder="John"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="lastName" className="text-white">Last Name</Label>
+                      <Label htmlFor="lastName" className="text-gray-700">Last Name</Label>
                       <Input 
                         id="lastName" 
-                        className="bg-white/10 border-white/20 text-white placeholder-white/60"
+                        className="border-gray-200 focus:border-blue-500"
                         placeholder="Doe"
                       />
                     </div>
                   </div>
                   
                   <div>
-                    <Label htmlFor="email" className="text-white">Email</Label>
+                    <Label htmlFor="email" className="text-gray-700">Email</Label>
                     <Input 
                       id="email" 
                       type="email"
-                      className="bg-white/10 border-white/20 text-white placeholder-white/60"
+                      className="border-gray-200 focus:border-blue-500"
                       placeholder="john@company.com"
                     />
                   </div>
                   
                   <div>
-                    <Label htmlFor="company" className="text-white">Company</Label>
+                    <Label htmlFor="company" className="text-gray-700">Company</Label>
                     <Input 
                       id="company" 
-                      className="bg-white/10 border-white/20 text-white placeholder-white/60"
+                      className="border-gray-200 focus:border-blue-500"
                       placeholder="Your Company Name"
                     />
                   </div>
                   
                   <div>
-                    <Label htmlFor="service" className="text-white">Service Interest</Label>
+                    <Label htmlFor="service" className="text-gray-700">Service Interest</Label>
                     <select 
                       id="service"
-                      className="w-full h-10 px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white"
+                      className="w-full h-10 px-3 py-2 border border-gray-200 rounded-md focus:border-blue-500"
                     >
                       <option value="">Select a service</option>
                       <option value="custom-ai">Custom AI Development</option>
@@ -116,10 +120,10 @@ const Contact = () => {
                   </div>
                   
                   <div>
-                    <Label htmlFor="budget" className="text-white">Project Budget</Label>
+                    <Label htmlFor="budget" className="text-gray-700">Project Budget</Label>
                     <select 
                       id="budget"
-                      className="w-full h-10 px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white"
+                      className="w-full h-10 px-3 py-2 border border-gray-200 rounded-md focus:border-blue-500"
                     >
                       <option value="">Select budget range</option>
                       <option value="10k-25k">$10,000 - $25,000</option>
@@ -130,16 +134,16 @@ const Contact = () => {
                   </div>
                   
                   <div>
-                    <Label htmlFor="message" className="text-white">Message</Label>
+                    <Label htmlFor="message" className="text-gray-700">Message</Label>
                     <textarea 
                       id="message"
                       rows={4}
-                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/60 resize-none"
+                      className="w-full px-3 py-2 border border-gray-200 rounded-md focus:border-blue-500 resize-none"
                       placeholder="Tell us about your project and how we can help..."
                     />
                   </div>
                   
-                  <Button className="bg-purple-600 hover:bg-purple-700 w-full text-lg py-3">
+                  <Button className="bg-blue-600 hover:bg-blue-700 text-white w-full text-lg py-3">
                     Send Message
                   </Button>
                 </form>
@@ -148,63 +152,63 @@ const Contact = () => {
 
             {/* Contact Information */}
             <div className="space-y-8">
-              <Card className="bg-white/10 border-white/20 backdrop-blur-sm p-6">
+              <Card className="bg-white border-0 shadow-lg p-6">
                 <CardHeader className="px-0">
-                  <CardTitle className="text-white text-xl">Contact Information</CardTitle>
+                  <CardTitle className="text-gray-900 text-xl">Contact Information</CardTitle>
                 </CardHeader>
                 <CardContent className="px-0 space-y-6">
                   <div className="flex items-center space-x-4">
-                    <Mail className="h-6 w-6 text-purple-400" />
+                    <Mail className="h-6 w-6 text-blue-600" />
                     <div>
-                      <div className="text-white font-medium">Email</div>
-                      <div className="text-white/70">hello@neuralflow.ai</div>
+                      <div className="text-gray-900 font-medium">Email</div>
+                      <div className="text-gray-600">hello@neuralflow.ai</div>
                     </div>
                   </div>
                   
                   <div className="flex items-center space-x-4">
-                    <Phone className="h-6 w-6 text-purple-400" />
+                    <Phone className="h-6 w-6 text-blue-600" />
                     <div>
-                      <div className="text-white font-medium">Phone</div>
-                      <div className="text-white/70">+1 (555) 123-4567</div>
+                      <div className="text-gray-900 font-medium">Phone</div>
+                      <div className="text-gray-600">+1 (555) 123-4567</div>
                     </div>
                   </div>
                   
                   <div className="flex items-center space-x-4">
-                    <MapPin className="h-6 w-6 text-purple-400" />
+                    <MapPin className="h-6 w-6 text-blue-600" />
                     <div>
-                      <div className="text-white font-medium">Address</div>
-                      <div className="text-white/70">123 AI Innovation Drive<br />San Francisco, CA 94105</div>
+                      <div className="text-gray-900 font-medium">Address</div>
+                      <div className="text-gray-600">123 AI Innovation Drive<br />San Francisco, CA 94105</div>
                     </div>
                   </div>
                   
                   <div className="flex items-center space-x-4">
-                    <Clock className="h-6 w-6 text-purple-400" />
+                    <Clock className="h-6 w-6 text-blue-600" />
                     <div>
-                      <div className="text-white font-medium">Business Hours</div>
-                      <div className="text-white/70">Mon - Fri: 9:00 AM - 6:00 PM PST</div>
+                      <div className="text-gray-900 font-medium">Business Hours</div>
+                      <div className="text-gray-600">Mon - Fri: 9:00 AM - 6:00 PM PST</div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="bg-white/10 border-white/20 backdrop-blur-sm p-6">
+              <Card className="bg-white border-0 shadow-lg p-6">
                 <CardHeader className="px-0">
-                  <CardTitle className="text-white text-xl">Schedule a Consultation</CardTitle>
-                  <CardDescription className="text-white/70">
+                  <CardTitle className="text-gray-900 text-xl">Schedule a Consultation</CardTitle>
+                  <CardDescription className="text-gray-600">
                     Book a free 30-minute consultation to discuss your AI needs.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="px-0">
-                  <Button className="bg-purple-600 hover:bg-purple-700 w-full">
+                  <Button className="bg-blue-600 hover:bg-blue-700 text-white w-full">
                     Book Free Consultation
                   </Button>
                 </CardContent>
               </Card>
 
-              <Card className="bg-white/10 border-white/20 backdrop-blur-sm p-6">
+              <Card className="bg-white border-0 shadow-lg p-6">
                 <CardHeader className="px-0">
-                  <CardTitle className="text-white text-xl">Quick Response</CardTitle>
-                  <CardDescription className="text-white/70">
+                  <CardTitle className="text-gray-900 text-xl">Quick Response</CardTitle>
+                  <CardDescription className="text-gray-600">
                     We typically respond to all inquiries within 24 hours during business days.
                   </CardDescription>
                 </CardHeader>
@@ -215,34 +219,34 @@ const Contact = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 px-6 bg-white/5">
+      <section className="py-20 px-6 bg-gray-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Frequently Asked Questions</h2>
-            <p className="text-xl text-white/70 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Quick answers to common questions about our AI services.
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <Card className="bg-white/10 border-white/20 backdrop-blur-sm p-6">
-              <h3 className="text-white font-semibold text-lg mb-3">How long does a typical AI project take?</h3>
-              <p className="text-white/70">Most projects take 8-16 weeks from start to deployment, depending on complexity and scope.</p>
+            <Card className="bg-white border-0 shadow-lg p-6">
+              <h3 className="text-gray-900 font-semibold text-lg mb-3">How long does a typical AI project take?</h3>
+              <p className="text-gray-600">Most projects take 8-16 weeks from start to deployment, depending on complexity and scope.</p>
             </Card>
             
-            <Card className="bg-white/10 border-white/20 backdrop-blur-sm p-6">
-              <h3 className="text-white font-semibold text-lg mb-3">What's the minimum budget for an AI project?</h3>
-              <p className="text-white/70">Our projects typically start at $15,000, though we offer consultations for businesses of all sizes.</p>
+            <Card className="bg-white border-0 shadow-lg p-6">
+              <h3 className="text-gray-900 font-semibold text-lg mb-3">What's the minimum budget for an AI project?</h3>
+              <p className="text-gray-600">Our projects typically start at $15,000, though we offer consultations for businesses of all sizes.</p>
             </Card>
             
-            <Card className="bg-white/10 border-white/20 backdrop-blur-sm p-6">
-              <h3 className="text-white font-semibold text-lg mb-3">Do you provide ongoing support?</h3>
-              <p className="text-white/70">Yes, we offer comprehensive support and maintenance packages to ensure your AI solutions continue to perform optimally.</p>
+            <Card className="bg-white border-0 shadow-lg p-6">
+              <h3 className="text-gray-900 font-semibold text-lg mb-3">Do you provide ongoing support?</h3>
+              <p className="text-gray-600">Yes, we offer comprehensive support and maintenance packages to ensure your AI solutions continue to perform optimally.</p>
             </Card>
             
-            <Card className="bg-white/10 border-white/20 backdrop-blur-sm p-6">
-              <h3 className="text-white font-semibold text-lg mb-3">Can you work with our existing systems?</h3>
-              <p className="text-white/70">Absolutely. We specialize in integrating AI solutions with existing business systems and workflows.</p>
+            <Card className="bg-white border-0 shadow-lg p-6">
+              <h3 className="text-gray-900 font-semibold text-lg mb-3">Can you work with our existing systems?</h3>
+              <p className="text-gray-600">Absolutely. We specialize in integrating AI solutions with existing business systems and workflows.</p>
             </Card>
           </div>
         </div>
