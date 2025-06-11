@@ -1,13 +1,10 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Brain, Bot, Cog, TrendingUp, Zap, Target, CheckCircle, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-
 const Services = () => {
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
         <div className="container mx-auto px-6 py-4">
@@ -200,15 +197,13 @@ const Services = () => {
               </Button>
             </Link>
             <Link to="/case-studies">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 text-lg px-8 py-3">
+              <Button size="lg" variant="outline" className="border-white text-white text-lg px-8 py-3 bg-slate-950 hover:bg-slate-800">
                 View Case Studies
               </Button>
             </Link>
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default Services;
