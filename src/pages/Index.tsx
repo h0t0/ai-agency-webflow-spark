@@ -1,13 +1,10 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Brain, Sparkles, TrendingUp, Zap, Users, CheckCircle, ArrowRight, Star } from "lucide-react";
 import { Link } from "react-router-dom";
-
 const Index = () => {
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
         <div className="container mx-auto px-6 py-4">
@@ -211,15 +208,13 @@ const Index = () => {
               </Button>
             </Link>
             <Link to="/services">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-4 text-lg">
+              <Button size="lg" variant="outline" className="border-white text-white px-8 py-4 text-lg bg-slate-950 hover:bg-slate-800">
                 View All Services
               </Button>
             </Link>
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
