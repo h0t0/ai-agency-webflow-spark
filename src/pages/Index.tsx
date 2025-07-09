@@ -4,10 +4,10 @@ import { Badge } from "@/components/ui/badge";
 import { Brain, Sparkles, TrendingUp, Zap, Users, CheckCircle, ArrowRight, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useActiveSections } from "@/hooks/useActiveSections";
-
 const Index = () => {
-  const { isSectionActive } = useActiveSections();
-
+  const {
+    isSectionActive
+  } = useActiveSections();
   return <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
@@ -32,14 +32,10 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}
-      {isSectionActive('hero') && (
-      <section className="pt-32 pb-20 px-6">
+      {isSectionActive('hero') && <section className="pt-32 pb-20 px-6">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-6 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
-              <Sparkles className="h-3 w-3 mr-1" />
-              Trusted by 500+ Companies
-            </Badge>
+            
             <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
               AI Solutions That
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent block">
@@ -66,12 +62,10 @@ const Index = () => {
             </div>
           </div>
         </div>
-      </section>
-      )}
+      </section>}
 
       {/* Services Section */}
-      {isSectionActive('services') && (
-      <section className="py-20 px-6 bg-gray-50">
+      {isSectionActive('services') && <section className="py-20 px-6 bg-gray-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Our AI Services</h2>
@@ -169,12 +163,10 @@ const Index = () => {
             </Card>
           </div>
         </div>
-      </section>
-      )}
+      </section>}
 
       {/* Stats Section */}
-      {isSectionActive('stats') && (
-      <section className="py-20 px-6">
+      {isSectionActive('stats') && <section className="py-20 px-6">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
@@ -195,12 +187,10 @@ const Index = () => {
             </div>
           </div>
         </div>
-      </section>
-      )}
+      </section>}
 
       {/* CTA Section */}
-      {isSectionActive('cta') && (
-      <section className="py-20 px-6 bg-gradient-to-r from-blue-600 to-purple-600">
+      {isSectionActive('cta') && <section className="py-20 px-6 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="container mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-6">Ready to Transform Your Business?</h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
@@ -219,8 +209,7 @@ const Index = () => {
             </Link>
           </div>
         </div>
-      </section>
-      )}
+      </section>}
     </div>;
 };
 export default Index;
