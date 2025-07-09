@@ -6,7 +6,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from '@/hooks/use-toast';
-import { LogOut } from 'lucide-react';
+import { LogOut, Settings, Activity, Eye } from 'lucide-react';
+import SectionManager from '@/components/admin/SectionManager';
+import AuditLog from '@/components/admin/AuditLog';
+import PreviewMode from '@/components/admin/PreviewMode';
 
 interface PageContent {
   title: string;
@@ -69,14 +72,38 @@ const AdminDashboard = () => {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Tabs defaultValue="home" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5">
+        <Tabs defaultValue="sections" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-8">
+            <TabsTrigger value="sections" className="flex items-center space-x-2">
+              <Settings className="h-4 w-4" />
+              <span>Sections</span>
+            </TabsTrigger>
+            <TabsTrigger value="preview" className="flex items-center space-x-2">
+              <Eye className="h-4 w-4" />
+              <span>Preview</span>
+            </TabsTrigger>
+            <TabsTrigger value="audit" className="flex items-center space-x-2">
+              <Activity className="h-4 w-4" />
+              <span>Audit Log</span>
+            </TabsTrigger>
             <TabsTrigger value="home">Home</TabsTrigger>
             <TabsTrigger value="about">About</TabsTrigger>
             <TabsTrigger value="services">Services</TabsTrigger>
             <TabsTrigger value="case-studies">Case Studies</TabsTrigger>
             <TabsTrigger value="contact">Contact</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="sections">
+            <SectionManager />
+          </TabsContent>
+
+          <TabsContent value="preview">
+            <PreviewMode />
+          </TabsContent>
+
+          <TabsContent value="audit">
+            <AuditLog />
+          </TabsContent>
 
           <TabsContent value="home">
             <Card>

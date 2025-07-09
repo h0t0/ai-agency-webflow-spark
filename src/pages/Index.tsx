@@ -3,7 +3,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Brain, Sparkles, TrendingUp, Zap, Users, CheckCircle, ArrowRight, Star } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useActiveSections } from "@/hooks/useActiveSections";
+
 const Index = () => {
+  const { isSectionActive } = useActiveSections();
+
   return <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
@@ -28,6 +32,7 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}
+      {isSectionActive('hero') && (
       <section className="pt-32 pb-20 px-6">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto text-center">
@@ -62,8 +67,10 @@ const Index = () => {
           </div>
         </div>
       </section>
+      )}
 
       {/* Services Section */}
+      {isSectionActive('services') && (
       <section className="py-20 px-6 bg-gray-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
@@ -163,8 +170,10 @@ const Index = () => {
           </div>
         </div>
       </section>
+      )}
 
       {/* Stats Section */}
+      {isSectionActive('stats') && (
       <section className="py-20 px-6">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-4 gap-8 text-center">
@@ -187,8 +196,10 @@ const Index = () => {
           </div>
         </div>
       </section>
+      )}
 
       {/* CTA Section */}
+      {isSectionActive('cta') && (
       <section className="py-20 px-6 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="container mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-6">Ready to Transform Your Business?</h2>
@@ -209,6 +220,7 @@ const Index = () => {
           </div>
         </div>
       </section>
+      )}
     </div>;
 };
 export default Index;
