@@ -10,6 +10,9 @@ import { LogOut, Settings, Activity, Eye } from 'lucide-react';
 import SectionManager from '@/components/admin/SectionManager';
 import AuditLog from '@/components/admin/AuditLog';
 import PreviewMode from '@/components/admin/PreviewMode';
+import ServicesManager from '@/components/admin/ServicesManager';
+import CaseStudiesManager from '@/components/admin/CaseStudiesManager';
+import ContactsManager from '@/components/admin/ContactsManager';
 
 interface PageContent {
   title: string;
@@ -73,7 +76,7 @@ const AdminDashboard = () => {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs defaultValue="sections" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-8">
+          <TabsList className="grid w-full grid-cols-11">
             <TabsTrigger value="sections" className="flex items-center space-x-2">
               <Settings className="h-4 w-4" />
               <span>Sections</span>
@@ -89,7 +92,7 @@ const AdminDashboard = () => {
             <TabsTrigger value="home">Home</TabsTrigger>
             <TabsTrigger value="about">About</TabsTrigger>
             <TabsTrigger value="services">Services</TabsTrigger>
-            <TabsTrigger value="case-studies">Case Studies</TabsTrigger>
+            <TabsTrigger value="case-studies">Cases</TabsTrigger>
             <TabsTrigger value="contact">Contact</TabsTrigger>
           </TabsList>
 
@@ -176,36 +179,15 @@ const AdminDashboard = () => {
           </TabsContent>
 
           <TabsContent value="services">
-            <Card>
-              <CardHeader>
-                <CardTitle>Edit Services Page</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">Services page editor coming soon...</p>
-              </CardContent>
-            </Card>
+            <ServicesManager />
           </TabsContent>
 
           <TabsContent value="case-studies">
-            <Card>
-              <CardHeader>
-                <CardTitle>Edit Case Studies Page</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">Case studies page editor coming soon...</p>
-              </CardContent>
-            </Card>
+            <CaseStudiesManager />
           </TabsContent>
 
           <TabsContent value="contact">
-            <Card>
-              <CardHeader>
-                <CardTitle>Edit Contact Page</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">Contact page editor coming soon...</p>
-              </CardContent>
-            </Card>
+            <ContactsManager />
           </TabsContent>
         </Tabs>
       </main>
