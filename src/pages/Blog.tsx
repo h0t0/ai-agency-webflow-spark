@@ -3,10 +3,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Brain, Calendar, User, ArrowRight, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
-
 const Blog = () => {
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
         <div className="container mx-auto px-6 py-4">
@@ -32,9 +30,7 @@ const Blog = () => {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6">
         <div className="container mx-auto text-center">
-          <Badge className="mb-6 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
-            📝 AI Insights & Trends
-          </Badge>
+          
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
             Latest in
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent block">
@@ -256,19 +252,13 @@ const Blog = () => {
             Subscribe to our newsletter for the latest AI trends, case studies, and expert insights delivered to your inbox.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-            <input 
-              type="email" 
-              placeholder="Enter your email" 
-              className="flex-1 px-4 py-3 rounded-md border border-gray-200 focus:border-blue-500"
-            />
+            <input type="email" placeholder="Enter your email" className="flex-1 px-4 py-3 rounded-md border border-gray-200 focus:border-blue-500" />
             <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3">
               Subscribe
             </Button>
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default Blog;
