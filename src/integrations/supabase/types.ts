@@ -14,7 +14,120 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      page_content: {
+        Row: {
+          content: Json | null
+          created_at: string
+          description: string | null
+          id: string
+          last_modified: string
+          modified_by: string
+          page_name: string
+          subtitle: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content?: Json | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          last_modified?: string
+          modified_by: string
+          page_name: string
+          subtitle?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: Json | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          last_modified?: string
+          modified_by?: string
+          page_name?: string
+          subtitle?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      section_audit_log: {
+        Row: {
+          action: string
+          id: string
+          new_state: boolean | null
+          previous_state: boolean | null
+          section_id: string
+          section_name: string
+          timestamp: string
+          user_email: string
+        }
+        Insert: {
+          action: string
+          id?: string
+          new_state?: boolean | null
+          previous_state?: boolean | null
+          section_id: string
+          section_name: string
+          timestamp?: string
+          user_email: string
+        }
+        Update: {
+          action?: string
+          id?: string
+          new_state?: boolean | null
+          previous_state?: boolean | null
+          section_id?: string
+          section_name?: string
+          timestamp?: string
+          user_email?: string
+        }
+        Relationships: []
+      }
+      section_configs: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          impact_warning: string | null
+          is_active: boolean
+          last_modified: string
+          modified_by: string
+          name: string
+          order_index: number
+          section_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          id?: string
+          impact_warning?: string | null
+          is_active?: boolean
+          last_modified?: string
+          modified_by: string
+          name: string
+          order_index?: number
+          section_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          impact_warning?: string | null
+          is_active?: boolean
+          last_modified?: string
+          modified_by?: string
+          name?: string
+          order_index?: number
+          section_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

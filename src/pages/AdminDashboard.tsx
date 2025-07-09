@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from '@/hooks/use-toast';
 import { LogOut, Settings, Activity, Eye } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 import SectionManager from '@/components/admin/SectionManager';
 import AuditLog from '@/components/admin/AuditLog';
 import PreviewMode from '@/components/admin/PreviewMode';
@@ -22,7 +23,7 @@ interface PageContent {
 }
 
 const AdminDashboard = () => {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
   const [homeContent, setHomeContent] = useState<PageContent>({
     title: 'Building the Future with AI',
     subtitle: 'Your Trusted AI Development Partner',
@@ -36,24 +37,83 @@ const AdminDashboard = () => {
   });
 
   useEffect(() => {
-    // Load saved content from localStorage
-    const savedHome = localStorage.getItem('homeContent');
-    const savedAbout = localStorage.getItem('aboutContent');
-    
-    if (savedHome) setHomeContent(JSON.parse(savedHome));
-    if (savedAbout) setAboutContent(JSON.parse(savedAbout));
+    loadPageContent();
   }, []);
 
-  const saveContent = (type: string, content: PageContent) => {
-    localStorage.setItem(`${type}Content`, JSON.stringify(content));
-    toast({
-      title: "Content saved",
-      description: `${type} page content has been updated`,
-    });
+  const loadPageContent = async () => {
+    try {
+      const { data: homeData } = await supabase
+        .from('page_content')
+        .select('*')
+        .eq('page_name', 'home')
+        .single();
+
+      const { data: aboutData } = await supabase
+        .from('page_content')
+        .select('*')
+        .eq('page_name', 'about')
+        .single();
+
+      if (homeData) {
+        setHomeContent({
+          title: homeData.title,
+          subtitle: homeData.subtitle || '',
+          description: homeData.description || '',
+          ...(homeData.content && typeof homeData.content === 'object' ? homeData.content : {})
+        });
+      }
+
+      if (aboutData) {
+        setAboutContent({
+          title: aboutData.title,
+          subtitle: aboutData.subtitle || '',
+          description: aboutData.description || '',
+          ...(aboutData.content && typeof aboutData.content === 'object' ? aboutData.content : {})
+        });
+      }
+    } catch (error) {
+      console.error('Error loading page content:', error);
+    }
   };
 
-  const handleLogout = () => {
-    logout();
+  const saveContent = async (type: string, content: PageContent) => {
+    try {
+      const { error } = await supabase
+        .from('page_content')
+        .upsert({
+          page_name: type,
+          title: content.title,
+          subtitle: content.subtitle,
+          description: content.description,
+          content: content,
+          modified_by: user?.email || 'admin'
+        });
+
+      if (error) {
+        console.error('Error saving content:', error);
+        toast({
+          title: "Error",
+          description: "Failed to save content",
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: "Content saved",
+          description: `${type} page content has been updated`,
+        });
+      }
+    } catch (error) {
+      console.error('Error saving content:', error);
+      toast({
+        title: "Error",
+        description: "Failed to save content",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const handleLogout = async () => {
+    await logout();
     toast({
       title: "Logged out",
       description: "You have been logged out successfully",
@@ -76,7 +136,7 @@ const AdminDashboard = () => {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs defaultValue="sections" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-11">
+          <TabsList className="grid w-full grid-cols-8">
             <TabsTrigger value="sections" className="flex items-center space-x-2">
               <Settings className="h-4 w-4" />
               <span>Sections</span>
@@ -93,7 +153,7 @@ const AdminDashboard = () => {
             <TabsTrigger value="about">About</TabsTrigger>
             <TabsTrigger value="services">Services</TabsTrigger>
             <TabsTrigger value="case-studies">Cases</TabsTrigger>
-            <TabsTrigger value="contact">Contact</TabsTrigger>
+            <TabsTrigger value="contacts">Contacts</TabsTrigger>
           </TabsList>
 
           <TabsContent value="sections">
@@ -186,7 +246,7 @@ const AdminDashboard = () => {
             <CaseStudiesManager />
           </TabsContent>
 
-          <TabsContent value="contact">
+          <TabsContent value="contacts">
             <ContactsManager />
           </TabsContent>
         </Tabs>

@@ -1,69 +1,184 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { toast } from '@/hooks/use-toast';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { LogIn, UserPlus } from 'lucide-react';
 
 const AdminLogin = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const { login } = useAuth();
+  const { user, login, signUp } = useAuth();
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState('login');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Redirect if already logged in
+  if (user) {
+    return <Navigate to="/admin" replace />;
+  }
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const success = login(username, password);
+    setIsLoading(true);
+    setError('');
+    setSuccess('');
+
+    const result = await login(email, password);
     
-    if (success) {
-      toast({
-        title: "Login successful",
-        description: "Welcome to the admin dashboard",
-      });
+    if (result.success) {
       navigate('/admin');
     } else {
-      toast({
-        title: "Login failed",
-        description: "Invalid credentials",
-        variant: "destructive",
-      });
+      setError(result.error || 'Login failed');
     }
+    
+    setIsLoading(false);
+  };
+
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError('');
+    setSuccess('');
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      setIsLoading(false);
+      return;
+    }
+
+    const result = await signUp(email, password);
+    
+    if (result.success) {
+      setSuccess('Account created! Check your email to confirm your account.');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+    } else {
+      setError(result.error || 'Sign up failed');
+    }
+    
+    setIsLoading(false);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-center">Admin Login</CardTitle>
+        <CardHeader className="text-center">
+          <LogIn className="h-8 w-8 mx-auto mb-2 text-blue-600" />
+          <CardTitle className="text-2xl font-bold">Admin Access</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <Input
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <Input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <Button type="submit" className="w-full">
-              Login
-            </Button>
-          </form>
-          <p className="text-sm text-gray-600 mt-4 text-center">
-            Use: admin / admin
-          </p>
+          <Tabs value={activeTab} onValueChange={setActiveTab}>
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="login" className="flex items-center space-x-2">
+                <LogIn className="h-4 w-4" />
+                <span>Login</span>
+              </TabsTrigger>
+              <TabsTrigger value="signup" className="flex items-center space-x-2">
+                <UserPlus className="h-4 w-4" />
+                <span>Sign Up</span>
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="login">
+              <form onSubmit={handleLogin} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2">Email</label>
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Password</label>
+                  <Input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter password"
+                    required
+                  />
+                </div>
+                
+                {error && (
+                  <Alert variant="destructive">
+                    <AlertDescription>{error}</AlertDescription>
+                  </Alert>
+                )}
+
+                {success && (
+                  <Alert>
+                    <AlertDescription>{success}</AlertDescription>
+                  </Alert>
+                )}
+                
+                <Button type="submit" disabled={isLoading} className="w-full">
+                  {isLoading ? 'Logging in...' : 'Login'}
+                </Button>
+              </form>
+            </TabsContent>
+
+            <TabsContent value="signup">
+              <form onSubmit={handleSignUp} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2">Email</label>
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Password</label>
+                  <Input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter password"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Confirm Password</label>
+                  <Input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Confirm password"
+                    required
+                  />
+                </div>
+                
+                {error && (
+                  <Alert variant="destructive">
+                    <AlertDescription>{error}</AlertDescription>
+                  </Alert>
+                )}
+
+                {success && (
+                  <Alert>
+                    <AlertDescription>{success}</AlertDescription>
+                  </Alert>
+                )}
+                
+                <Button type="submit" disabled={isLoading} className="w-full">
+                  {isLoading ? 'Creating Account...' : 'Sign Up'}
+                </Button>
+              </form>
+            </TabsContent>
+          </Tabs>
         </CardContent>
       </Card>
     </div>

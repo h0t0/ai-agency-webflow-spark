@@ -1,48 +1,7 @@
 import { useState, useEffect } from 'react';
 import { SectionConfig, AuditLogEntry } from '@/types/admin';
+import { supabase } from '@/integrations/supabase/client';
 
-const defaultSections: SectionConfig[] = [
-  {
-    id: 'hero',
-    name: 'Hero Section',
-    description: 'Main banner with title and call-to-action buttons',
-    isActive: true,
-    lastModified: new Date().toISOString(),
-    modifiedBy: 'admin',
-    order: 1,
-    impactWarning: 'Disabling this will remove the main hero banner from the home page'
-  },
-  {
-    id: 'services',
-    name: 'Services Section',
-    description: 'Overview of AI services offered',
-    isActive: true,
-    lastModified: new Date().toISOString(),
-    modifiedBy: 'admin',
-    order: 2,
-    impactWarning: 'This will hide all service information from the home page'
-  },
-  {
-    id: 'stats',
-    name: 'Statistics Section',
-    description: 'Company statistics and achievements',
-    isActive: true,
-    lastModified: new Date().toISOString(),
-    modifiedBy: 'admin',
-    order: 3,
-    impactWarning: 'Statistics will no longer be visible to visitors'
-  },
-  {
-    id: 'cta',
-    name: 'Call-to-Action Section',
-    description: 'Final conversion section with contact buttons',
-    isActive: true,
-    lastModified: new Date().toISOString(),
-    modifiedBy: 'admin',
-    order: 4,
-    impactWarning: 'This will remove the main conversion section from the home page'
-  }
-];
 
 export const useSectionManager = () => {
   const [sections, setSections] = useState<SectionConfig[]>([]);
@@ -54,104 +13,192 @@ export const useSectionManager = () => {
     loadAuditLog();
   }, []);
 
-  const loadSections = () => {
-    const saved = localStorage.getItem('sectionConfigs');
-    if (saved) {
-      setSections(JSON.parse(saved));
-    } else {
-      setSections(defaultSections);
-      localStorage.setItem('sectionConfigs', JSON.stringify(defaultSections));
-    }
-    setIsLoading(false);
-  };
+  const loadSections = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('section_configs')
+        .select('*')
+        .order('order_index');
 
-  const loadAuditLog = () => {
-    const saved = localStorage.getItem('sectionAuditLog');
-    if (saved) {
-      setAuditLog(JSON.parse(saved));
-    }
-  };
-
-  const saveSections = (newSections: SectionConfig[]) => {
-    setSections(newSections);
-    localStorage.setItem('sectionConfigs', JSON.stringify(newSections));
-  };
-
-  const addAuditEntry = (entry: Omit<AuditLogEntry, 'id' | 'timestamp'>) => {
-    const newEntry: AuditLogEntry = {
-      ...entry,
-      id: Date.now().toString(),
-      timestamp: new Date().toISOString()
-    };
-    const newLog = [newEntry, ...auditLog].slice(0, 100); // Keep last 100 entries
-    setAuditLog(newLog);
-    localStorage.setItem('sectionAuditLog', JSON.stringify(newLog));
-  };
-
-  const toggleSection = (sectionId: string) => {
-    const newSections = sections.map(section => {
-      if (section.id === sectionId) {
-        const newState = !section.isActive;
-        addAuditEntry({
-          action: newState ? 'enabled' : 'disabled',
-          sectionId: section.id,
-          sectionName: section.name,
-          user: 'admin',
-          previousState: section.isActive,
-          newState: newState
-        });
-        return {
-          ...section,
-          isActive: newState,
-          lastModified: new Date().toISOString(),
-          modifiedBy: 'admin'
-        };
+      if (error) {
+        console.error('Error loading sections:', error);
+        return;
       }
-      return section;
-    });
-    saveSections(newSections);
+
+      const formattedSections: SectionConfig[] = data?.map(section => ({
+        id: section.section_id,
+        name: section.name,
+        description: section.description,
+        isActive: section.is_active,
+        lastModified: section.last_modified,
+        modifiedBy: section.modified_by,
+        order: section.order_index,
+        impactWarning: section.impact_warning
+      })) || [];
+
+      setSections(formattedSections);
+    } catch (error) {
+      console.error('Error loading sections:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const batchToggleSections = (sectionIds: string[], enable: boolean) => {
-    const newSections = sections.map(section => {
-      if (sectionIds.includes(section.id)) {
-        addAuditEntry({
-          action: enable ? 'enabled' : 'disabled',
-          sectionId: section.id,
-          sectionName: section.name,
-          user: 'admin',
-          previousState: section.isActive,
-          newState: enable
-        });
-        return {
-          ...section,
-          isActive: enable,
-          lastModified: new Date().toISOString(),
-          modifiedBy: 'admin'
-        };
+  const loadAuditLog = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('section_audit_log')
+        .select('*')
+        .order('timestamp', { ascending: false })
+        .limit(100);
+
+      if (error) {
+        console.error('Error loading audit log:', error);
+        return;
       }
-      return section;
-    });
-    saveSections(newSections);
+
+      const formattedLog: AuditLogEntry[] = data?.map(entry => ({
+        id: entry.id,
+        timestamp: entry.timestamp,
+        action: entry.action as 'enabled' | 'disabled' | 'modified',
+        sectionId: entry.section_id,
+        sectionName: entry.section_name,
+        user: entry.user_email,
+        previousState: entry.previous_state,
+        newState: entry.new_state
+      })) || [];
+
+      setAuditLog(formattedLog);
+    } catch (error) {
+      console.error('Error loading audit log:', error);
+    }
   };
 
-  const emergencyRestore = () => {
-    const restoredSections = sections.map(section => ({
-      ...section,
-      isActive: true,
-      lastModified: new Date().toISOString(),
-      modifiedBy: 'admin (emergency restore)'
-    }));
-    saveSections(restoredSections);
-    
-    addAuditEntry({
-      action: 'enabled',
-      sectionId: 'all',
-      sectionName: 'All Sections',
-      user: 'admin (emergency restore)',
-      previousState: false,
-      newState: true
-    });
+  const addAuditEntry = async (entry: Omit<AuditLogEntry, 'id' | 'timestamp'>) => {
+    try {
+      const { error } = await supabase
+        .from('section_audit_log')
+        .insert({
+          section_id: entry.sectionId,
+          section_name: entry.sectionName,
+          action: entry.action,
+          user_email: entry.user,
+          previous_state: entry.previousState,
+          new_state: entry.newState
+        });
+
+      if (error) {
+        console.error('Error adding audit entry:', error);
+      } else {
+        loadAuditLog(); // Refresh audit log
+      }
+    } catch (error) {
+      console.error('Error adding audit entry:', error);
+    }
+  };
+
+  const toggleSection = async (sectionId: string) => {
+    const section = sections.find(s => s.id === sectionId);
+    if (!section) return;
+
+    const newState = !section.isActive;
+
+    try {
+      const { error } = await supabase
+        .from('section_configs')
+        .update({ 
+          is_active: newState,
+          last_modified: new Date().toISOString(),
+          modified_by: 'admin'
+        })
+        .eq('section_id', sectionId);
+
+      if (error) {
+        console.error('Error toggling section:', error);
+        return;
+      }
+
+      await addAuditEntry({
+        action: newState ? 'enabled' : 'disabled',
+        sectionId: section.id,
+        sectionName: section.name,
+        user: 'admin',
+        previousState: section.isActive,
+        newState: newState
+      });
+
+      loadSections(); // Refresh sections
+    } catch (error) {
+      console.error('Error toggling section:', error);
+    }
+  };
+
+  const batchToggleSections = async (sectionIds: string[], enable: boolean) => {
+    try {
+      const { error } = await supabase
+        .from('section_configs')
+        .update({ 
+          is_active: enable,
+          last_modified: new Date().toISOString(),
+          modified_by: 'admin'
+        })
+        .in('section_id', sectionIds);
+
+      if (error) {
+        console.error('Error batch toggling sections:', error);
+        return;
+      }
+
+      // Add audit entries for each section
+      for (const sectionId of sectionIds) {
+        const section = sections.find(s => s.id === sectionId);
+        if (section) {
+          await addAuditEntry({
+            action: enable ? 'enabled' : 'disabled',
+            sectionId: section.id,
+            sectionName: section.name,
+            user: 'admin',
+            previousState: section.isActive,
+            newState: enable
+          });
+        }
+      }
+
+      loadSections(); // Refresh sections
+    } catch (error) {
+      console.error('Error batch toggling sections:', error);
+    }
+  };
+
+  const emergencyRestore = async () => {
+    try {
+      const { error } = await supabase
+        .from('section_configs')
+        .update({ 
+          is_active: true,
+          last_modified: new Date().toISOString(),
+          modified_by: 'admin (emergency restore)'
+        })
+        .in('section_id', sections.map(s => s.id));
+
+      if (error) {
+        console.error('Error in emergency restore:', error);
+        return;
+      }
+
+      await addAuditEntry({
+        action: 'enabled',
+        sectionId: 'all',
+        sectionName: 'All Sections',
+        user: 'admin (emergency restore)',
+        previousState: false,
+        newState: true
+      });
+
+      loadSections(); // Refresh sections
+    } catch (error) {
+      console.error('Error in emergency restore:', error);
+    }
   };
 
   return {
