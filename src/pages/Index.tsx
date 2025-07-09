@@ -56,14 +56,8 @@ const Index = () => {
             
             {/* Social Proof */}
             <div className="flex items-center justify-center space-x-8 text-sm text-gray-500">
-              <div className="flex items-center space-x-1">
-                <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                <span className="font-medium">4.9/5 Client Rating</span>
-              </div>
-              <div className="flex items-center space-x-1">
-                <CheckCircle className="h-4 w-4 text-green-500" />
-                <span className="font-medium">150+ Projects Delivered</span>
-              </div>
+              
+              
             </div>
           </div>
         </div>
