@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -6,10 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Brain, Mail, Phone, MapPin, Clock, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
-
 const Contact = () => {
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
         <div className="container mx-auto px-6 py-4">
@@ -35,9 +32,7 @@ const Contact = () => {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6">
         <div className="container mx-auto text-center">
-          <Badge className="mb-6 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
-            💬 Get in Touch
-          </Badge>
+          
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
             Let's Transform Your Business
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent block">
@@ -70,47 +65,27 @@ const Contact = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="firstName" className="text-gray-700">First Name</Label>
-                      <Input 
-                        id="firstName" 
-                        className="border-gray-200 focus:border-blue-500"
-                        placeholder="John"
-                      />
+                      <Input id="firstName" className="border-gray-200 focus:border-blue-500" placeholder="John" />
                     </div>
                     <div>
                       <Label htmlFor="lastName" className="text-gray-700">Last Name</Label>
-                      <Input 
-                        id="lastName" 
-                        className="border-gray-200 focus:border-blue-500"
-                        placeholder="Doe"
-                      />
+                      <Input id="lastName" className="border-gray-200 focus:border-blue-500" placeholder="Doe" />
                     </div>
                   </div>
                   
                   <div>
                     <Label htmlFor="email" className="text-gray-700">Email</Label>
-                    <Input 
-                      id="email" 
-                      type="email"
-                      className="border-gray-200 focus:border-blue-500"
-                      placeholder="john@company.com"
-                    />
+                    <Input id="email" type="email" className="border-gray-200 focus:border-blue-500" placeholder="john@company.com" />
                   </div>
                   
                   <div>
                     <Label htmlFor="company" className="text-gray-700">Company</Label>
-                    <Input 
-                      id="company" 
-                      className="border-gray-200 focus:border-blue-500"
-                      placeholder="Your Company Name"
-                    />
+                    <Input id="company" className="border-gray-200 focus:border-blue-500" placeholder="Your Company Name" />
                   </div>
                   
                   <div>
                     <Label htmlFor="service" className="text-gray-700">Service Interest</Label>
-                    <select 
-                      id="service"
-                      className="w-full h-10 px-3 py-2 border border-gray-200 rounded-md focus:border-blue-500"
-                    >
+                    <select id="service" className="w-full h-10 px-3 py-2 border border-gray-200 rounded-md focus:border-blue-500">
                       <option value="">Select a service</option>
                       <option value="custom-ai">Custom AI Development</option>
                       <option value="automation">Process Automation</option>
@@ -121,10 +96,7 @@ const Contact = () => {
                   
                   <div>
                     <Label htmlFor="budget" className="text-gray-700">Project Budget</Label>
-                    <select 
-                      id="budget"
-                      className="w-full h-10 px-3 py-2 border border-gray-200 rounded-md focus:border-blue-500"
-                    >
+                    <select id="budget" className="w-full h-10 px-3 py-2 border border-gray-200 rounded-md focus:border-blue-500">
                       <option value="">Select budget range</option>
                       <option value="10k-25k">$10,000 - $25,000</option>
                       <option value="25k-50k">$25,000 - $50,000</option>
@@ -135,12 +107,7 @@ const Contact = () => {
                   
                   <div>
                     <Label htmlFor="message" className="text-gray-700">Message</Label>
-                    <textarea 
-                      id="message"
-                      rows={4}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-md focus:border-blue-500 resize-none"
-                      placeholder="Tell us about your project and how we can help..."
-                    />
+                    <textarea id="message" rows={4} className="w-full px-3 py-2 border border-gray-200 rounded-md focus:border-blue-500 resize-none" placeholder="Tell us about your project and how we can help..." />
                   </div>
                   
                   <Button className="bg-blue-600 hover:bg-blue-700 text-white w-full text-lg py-3">
@@ -251,8 +218,6 @@ const Contact = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
