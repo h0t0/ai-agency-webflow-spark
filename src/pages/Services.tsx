@@ -30,10 +30,7 @@ const Services = () => {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6">
         <div className="container mx-auto text-center">
-          <Badge className="mb-6 bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100">
-            <Cog className="h-3 w-3 mr-1" />
-            Our AI Services
-          </Badge>
+          
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
             Comprehensive AI Solutions
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent block">
