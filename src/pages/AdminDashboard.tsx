@@ -14,6 +14,7 @@ import PreviewMode from '@/components/admin/PreviewMode';
 import ServicesManager from '@/components/admin/ServicesManager';
 import CaseStudiesManager from '@/components/admin/CaseStudiesManager';
 import ContactsManager from '@/components/admin/ContactsManager';
+import UsersManager from '@/components/admin/UsersManager';
 
 interface PageContent {
   title: string;
@@ -136,7 +137,7 @@ const AdminDashboard = () => {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs defaultValue="sections" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-8">
+          <TabsList className="grid w-full grid-cols-9">
             <TabsTrigger value="sections" className="flex items-center space-x-2">
               <Settings className="h-4 w-4" />
               <span>Sections</span>
@@ -149,6 +150,7 @@ const AdminDashboard = () => {
               <Activity className="h-4 w-4" />
               <span>Audit Log</span>
             </TabsTrigger>
+            <TabsTrigger value="users">Users</TabsTrigger>
             <TabsTrigger value="home">Home</TabsTrigger>
             <TabsTrigger value="about">About</TabsTrigger>
             <TabsTrigger value="services">Services</TabsTrigger>
@@ -166,6 +168,10 @@ const AdminDashboard = () => {
 
           <TabsContent value="audit">
             <AuditLog />
+          </TabsContent>
+
+          <TabsContent value="users">
+            <UsersManager />
           </TabsContent>
 
           <TabsContent value="home">

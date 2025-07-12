@@ -4,10 +4,9 @@ import { Badge } from "@/components/ui/badge";
 import { Brain, Sparkles, TrendingUp, Zap, Users, CheckCircle, ArrowRight, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useActiveSections } from "@/hooks/useActiveSections";
+
 const Index = () => {
-  const {
-    isSectionActive
-  } = useActiveSections();
+  const { activeSections } = useActiveSections();
   return <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
@@ -20,19 +19,31 @@ const Index = () => {
               <span className="text-2xl font-bold text-gray-900">NeuralFlow</span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
-              <Link to="/services" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Services</Link>
-              <Link to="/about" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">About</Link>
-              <Link to="/case-studies" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Case Studies</Link>
-              <Link to="/blog" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Blog</Link>
-              <Link to="/contact" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Contact</Link>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6">Get Started</Button>
+              {activeSections.services && (
+                <Link to="/services" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Services</Link>
+              )}
+              {activeSections.about && (
+                <Link to="/about" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">About</Link>
+              )}
+              {activeSections['case-studies'] && (
+                <Link to="/case-studies" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Case Studies</Link>
+              )}
+              {activeSections.blog && (
+                <Link to="/blog" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Blog</Link>
+              )}
+              {activeSections.contact && (
+                <Link to="/contact" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Contact</Link>
+              )}
+              <Link to="/admin/login">
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6">Admin</Button>
+              </Link>
             </div>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      {isSectionActive('hero') && <section className="pt-32 pb-20 px-6">
+      {activeSections.hero && <section className="pt-32 pb-20 px-6">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto text-center">
             
@@ -65,7 +76,7 @@ const Index = () => {
       </section>}
 
       {/* Services Section */}
-      {isSectionActive('services') && <section className="py-20 px-6 bg-gray-50">
+      {activeSections.services && <section className="py-20 px-6 bg-gray-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Our AI Services</h2>
@@ -166,7 +177,7 @@ const Index = () => {
       </section>}
 
       {/* Stats Section */}
-      {isSectionActive('stats') && <section className="py-20 px-6">
+      {activeSections.about && <section className="py-20 px-6">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
@@ -190,26 +201,80 @@ const Index = () => {
       </section>}
 
       {/* CTA Section */}
-      {isSectionActive('cta') && <section className="py-20 px-6 bg-gradient-to-r from-blue-600 to-purple-600">
+      {activeSections.contact && <section className="py-20 px-6 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="container mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-6">Ready to Transform Your Business?</h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
             Join hundreds of companies that trust us to deliver cutting-edge AI solutions.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link to="/contact">
-              <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg">
-                Get Free Consultation
-              </Button>
-            </Link>
-            <Link to="/services">
-              <Button size="lg" variant="outline" className="border-white px-8 py-4 text-lg bg-slate-50 text-slate-950">
-                View All Services
-              </Button>
-            </Link>
+            {activeSections.contact && (
+              <Link to="/contact">
+                <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg">
+                  Get Free Consultation
+                </Button>
+              </Link>
+            )}
+            {activeSections.services && (
+              <Link to="/services">
+                <Button size="lg" variant="outline" className="border-white px-8 py-4 text-lg bg-slate-50 text-slate-950">
+                  View All Services
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </section>}
+
+      {/* Footer */}
+      {activeSections.footer && (
+        <footer className="bg-gray-900 text-white py-12 px-6">
+          <div className="container mx-auto">
+            <div className="grid md:grid-cols-4 gap-8">
+              <div className="md:col-span-2">
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                    <Brain className="h-5 w-5 text-white" />
+                  </div>
+                  <span className="text-xl font-bold">NeuralFlow</span>
+                </div>
+                <p className="text-gray-400 mb-4 max-w-md">
+                  Transforming businesses through innovative AI solutions. 
+                  We're your trusted partner in the journey towards intelligent automation.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul className="space-y-2">
+                  {activeSections.about && (
+                    <li><Link to="/about" className="text-gray-400 hover:text-white transition-colors">About</Link></li>
+                  )}
+                  {activeSections.services && (
+                    <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors">Services</Link></li>
+                  )}
+                  {activeSections['case-studies'] && (
+                    <li><Link to="/case-studies" className="text-gray-400 hover:text-white transition-colors">Case Studies</Link></li>
+                  )}
+                  {activeSections.contact && (
+                    <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</Link></li>
+                  )}
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
+                <ul className="space-y-2 text-gray-400">
+                  <li>info@neuralflow.ai</li>
+                  <li>+1 (555) 123-4567</li>
+                  <li>San Francisco, CA</li>
+                </ul>
+              </div>
+            </div>
+            <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+              <p>&copy; 2024 NeuralFlow. All rights reserved.</p>
+            </div>
+          </div>
+        </footer>
+      )}
     </div>;
 };
 export default Index;
