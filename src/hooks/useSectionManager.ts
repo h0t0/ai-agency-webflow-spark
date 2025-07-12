@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { SectionConfig, AuditLogEntry } from '@/types/admin';
 import { supabase } from '@/integrations/supabase/client';
+import { testSupabaseConnection } from '@/utils/testConnection';
 
 
 export const useSectionManager = () => {
@@ -15,6 +16,11 @@ export const useSectionManager = () => {
 
   const loadSections = async () => {
     try {
+      console.log('Testing connection first...');
+      const testResult = await testSupabaseConnection();
+      console.log('Test result:', testResult);
+      
+      console.log('Loading sections...');
       const { data, error } = await supabase
         .from('section_configs')
         .select('*')
@@ -22,6 +28,7 @@ export const useSectionManager = () => {
 
       if (error) {
         console.error('Error loading sections:', error);
+        console.log('Error details:', JSON.stringify(error, null, 2));
         return;
       }
 

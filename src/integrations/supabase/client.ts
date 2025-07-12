@@ -5,6 +5,11 @@ import type { Database } from './types';
 const SUPABASE_URL = "https://grlsdxwwdyqibygdbatc.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdybHNkeHd3ZHlxaWJ5Z2RiYXRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwNzI1MTYsImV4cCI6MjA2NzY0ODUxNn0.dmm5OzF7nl0qcZ5Wj2CzvujYuBVgq1oCE5rGMElEJYs";
 
+console.log('Supabase configuration:', { 
+  url: SUPABASE_URL, 
+  keyLength: SUPABASE_PUBLISHABLE_KEY.length 
+});
+
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
@@ -14,12 +19,15 @@ export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABL
     persistSession: true,
     autoRefreshToken: true,
   },
-  db: {
-    schema: 'public'
-  },
   global: {
     headers: {
-      'X-Client-Info': 'lovable-app'
+      'X-Client-Info': 'lovable-app',
+      'apikey': SUPABASE_PUBLISHABLE_KEY
     }
   }
+});
+
+console.log('Supabase client created:', { 
+  baseUrl: SUPABASE_URL + '/rest/v1',
+  ready: !!supabase 
 });
